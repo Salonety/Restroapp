@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/services.dart';
+import 'package:sms_autofill/sms_autofill.dart';
+import 'dart:async';
+import 'dart:convert';
+
+
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -231,6 +236,10 @@ class DashboardScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => NcScreen()),
                   );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => LoginPage()),
+                  // );
                 },
               ),
             ],
@@ -278,194 +287,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 }
-// class DineInScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Dine In'),
-//         backgroundColor: const Color(0xff191919),
-//         actions: [
-//           IconButton(
-//             icon: const Icon(Icons.search),
-//             onPressed: () {
-//               // Implement search functionality here
-//             },
-//           ),
-//           IconButton(
-//             icon: const Icon(Icons.remove_red_eye_rounded),
-//             onPressed: () {
-//               // Implement search functionality here
-//               Fluttertoast.showToast(
-//                 msg: 'show table reservation.',
-//                 toastLength: Toast.LENGTH_SHORT,
-//                 gravity: ToastGravity.BOTTOM,
-//                 timeInSecForIosWeb: 1,
-//                 backgroundColor: Colors.grey[700],
-//                 textColor: Colors.white,
-//                 fontSize: 16.0,
-//               );
-//
-//             },
-//           ),
-//           IconButton(
-//             icon: const Icon(Icons.table_restaurant),
-//             onPressed: () {
-//               // Implement search functionality here
-//               Fluttertoast.showToast(
-//                 msg: 'add table',
-//                 toastLength: Toast.LENGTH_SHORT,
-//                 gravity: ToastGravity.BOTTOM,
-//                 timeInSecForIosWeb: 1,
-//                 backgroundColor: Colors.grey[700],
-//                 textColor: Colors.white,
-//                 fontSize: 16.0,
-//               );
-//
-//             },
-//           )
-//         ],
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.all(0.0),
-//               child: Container(
-//                 color: const Color(0xffb3ff66),
-//                 width: double.infinity,
-//                 padding: const EdgeInsets.all(16.0),
-//                 child: const Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Running Tables',
-//                       style: TextStyle(
-//                         fontSize: 18.0,
-//                         color: Color(0xff191919),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//
-//             Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Row(children:[ ElevatedButton.icon(
-//                 onPressed: () {
-//                   // Implement table reservation functionality here
-//                 },
-//                 icon: const Icon(Icons.add),
-//                 label: const Text('Table Reservation'),
-//                 style: ElevatedButton.styleFrom(
-//                   primary: const Color(0xff191919),
-//                   textStyle: const TextStyle(
-//                     fontSize: 18.0,
-//                   ),
-//                 ),
-//               ),])
-//
-//               ,
-//             ),
-//
-//             const SizedBox(height: 16),
-//             // Legend for circle colors and percentages
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 _buildLegendItem(Colors.black, 'Empty Tables'),
-//                 _buildLegendItem(Colors.green, 'Running Tables'),
-//                 _buildLegendItem(Colors.red, 'Payment Pending'),
-//               ],
-//             ),
-//
-//             const Padding(
-//               padding: EdgeInsets.all(16.0),
-//               child: Text(
-//                 'Balcony View',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//             ),
-//             const SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Row(
-//                 children: [
-//                   TableCard(number: 'T1', index: 5,ammount: "",),
-//                   TableCard(number: 'T2', index: 6, isRed: true,ammount: "",),
-//                   TableCard(number: 'T3', index: 7,ammount: "",),
-//                   TableCard(number: 'T4', index: 8, isGreen: true,ammount: '\$10.99'),
-//                 ],
-//               ),
-//             ),
-//             const SizedBox(height: 16.0),
-//             const Padding(
-//               padding: EdgeInsets.all(16.0),
-//               child: Text(
-//                 'Garden View',
-//                 style: TextStyle(
-//                   fontSize: 20,
-//                 ),
-//               ),
-//             ),
-//             const SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Row(
-//                 children: [
-//                   TableCard(number: 'T1', index: 5,ammount: "",),
-//                   TableCard(number: 'T2', index: 6, isRed: true,ammount: "",),
-//                   TableCard(number: 'T3', index: 7,ammount: "",),
-//                   TableCard(number: 'T4', index: 8, isGreen: true,ammount: '\$12.99'),
-//                 ],
-//               ),
-//             ),
-//             const SizedBox(height: 16.0),
-//             const Padding(
-//               padding: EdgeInsets.all(16.0),
-//               child: Text(
-//                 'Indoor',
-//                 style: TextStyle(
-//                   fontSize: 20,
-//                 ),
-//               ),
-//             ),
-//             const SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: Row(
-//                 children: [
-//                   TableCard(number: 'T1', index: 5,ammount: "",),
-//                   TableCard(number: 'T2', index: 6, isRed: true,ammount: "",),
-//                   TableCard(number: 'T3', index: 7,ammount: "",),
-//                   TableCard(number: 'T4', index: 8, isGreen: true,ammount: '\$22.99'),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//
-//   Widget _buildLegendItem(Color color, String label) {
-//     return Row(
-//       children: [
-//         Container(
-//           width: 16,
-//           height: 16,
-//           decoration: BoxDecoration(
-//             color: color,
-//             shape: BoxShape.circle,
-//           ),
-//         ),
-//         const SizedBox(width: 4),
-//         Text(label),
-//         const SizedBox(width: 4),
-//
-//       ],
-//     );
-//   }
-// }
+
 class MenuListScreen extends StatefulWidget {
   final FoodItem foodItem;
 
@@ -525,7 +347,6 @@ class MenuListScreen extends StatefulWidget {
 
     // Add more veg items as needed
   ];
-
   @override
   _MenuListScreenState createState() => _MenuListScreenState();
 }
@@ -538,6 +359,21 @@ class _MenuListScreenState extends State<MenuListScreen>
   late int counter=0;
   List<int> counterList = [];
   List<Addinal>additems=[];
+  List<MenuItemm> indians = [];
+
+
+  Future<List<MenuItemm>> fetchMenuItems() async {
+    final response = await http.get(Uri.parse('http://demo.wspl.co/api/Menus'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      print('ssdfsdfsdfs:$response.body');
+
+      return data.map((item) => MenuItemm.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load menu items');
+    }
+  }
 
 
   @override
@@ -548,6 +384,10 @@ class _MenuListScreenState extends State<MenuListScreen>
     showFirstButtonList = List<bool>.filled(widget.vegItems.length, false);
     counterList = List<int>.filled(widget.vegItems.length, 0);
     additems = [];
+    indians=[];
+    fetchMenuItems();
+    print("comingggthisblock");
+
 
   }
 
@@ -725,7 +565,8 @@ class _MenuListScreenState extends State<MenuListScreen>
     ];    return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff191919),
-        // title:  Text('${widget.foodItem.title}'),
+         title:  Text('${widget.foodItem.title}',style:TextStyle( fontWeight: FontWeight.bold, // Add this line for bold font weight
+             fontFamily: 'serif'),),
 
         bottom: TabBar(
           controller: _tabController,
@@ -775,8 +616,10 @@ class _MenuListScreenState extends State<MenuListScreen>
                             fit: BoxFit.cover,
                           ),
                         ),
-                        title: Text(item.name),
-                        subtitle: Text(item.price),
+                        title: Text(item.name,style:TextStyle(  // Add this line for bold font weight
+                            fontFamily: 'serif'),),
+                        subtitle: Text(item.price,style:TextStyle(  // Add this line for bold font weight
+                            fontFamily: 'serif'),),
 
                         trailing: Column(
                             children: [
@@ -807,7 +650,8 @@ class _MenuListScreenState extends State<MenuListScreen>
                                         borderRadius: BorderRadius.circular(8.0), // Set the border radius
                                       ),
                                     ),
-                                    child: Text('Add', style: TextStyle(fontSize: 10)),
+                                    child: Text('Add', style: TextStyle(fontSize: 10,// Add this line for bold font weight
+                                        fontFamily: 'serif'),),
                                   ),
 
 
@@ -967,7 +811,7 @@ class _MenuListScreenState extends State<MenuListScreen>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text("Add to Card : $counter Items",  style: TextStyle(
-                fontSize: 20,color: Colors.white
+                fontSize: 20,color: Colors.white,fontFamily: "serif",
             ),
             ),
             IconButton(
@@ -988,7 +832,25 @@ class _MenuListScreenState extends State<MenuListScreen>
 
 }
 
+
+////////////////////////////////
+
+class MenuItemm {
+  final String disName;
+  final String largePrice;
+
+  MenuItemm({required this.disName, required this.largePrice});
+
+  factory MenuItemm.fromJson(Map<String, dynamic> json) {
+    return MenuItemm(
+      disName: json['disName'],
+      largePrice: json['largePrice'],
+    );
+  }
+}
+
 class TableCard extends StatelessWidget {
+  final String time;
   final String number;
   final int index;
   final bool isRed;
@@ -997,6 +859,7 @@ class TableCard extends StatelessWidget {
   final bool isResGreen;
 
   const TableCard({
+    required this.time,
     required this.number,
     required this.index,
     this.isRed = false,
@@ -1009,17 +872,18 @@ class TableCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      // padding: const EdgeInsets.symmetric(horizontal: 8.0),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
 
-        width: 100.0,
-        height: 100.0,
+        width: 80.0,
+        height: 80.0,
         decoration: BoxDecoration(
-          //color: Colors.white,
-          color: isResGreen ? Color(0xffb3ff66) : Colors.white,
+          color: Colors.white,
+         // color: isResGreen ? Colors.grey[300] : Colors.grey[300],
           border: Border.all(
             color: Colors.black,
-            width: 2.0,
+            width: 0.8,
           ),
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -1028,18 +892,43 @@ class TableCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                number,
+                time,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.bold, // Add this line for bold font weight
+                  fontFamily: 'serif',
+                  color: isRed ? Colors.red : isGreen ? Colors.green : Colors.black,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                number,
+                // style: const TextStyle(
+                //   fontSize: 16.0,
+                //   color: Colors.black,
+                //
+                //   //color: isRed ? Colors.red : isGreen ? Colors.green : Colors.black,
+                // ),
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold, // Add this line for bold font weight
+                  fontFamily: 'serif',
                   color: isRed ? Colors.red : isGreen ? Colors.green : Colors.black,
                 ),
               ),
               const SizedBox(height: 8.0),
               Text(
                 ammount,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
+                // style: const TextStyle(
+                //   fontSize: 16.0,
+                //   color: Colors.black,
+                //
+                //   //color: isRed ? Colors.red : isGreen ? Colors.green : Colors.black,
+                // ),
+                style: TextStyle(
+                  fontSize: 12.0,
+                  fontFamily: 'serif',
+                  color: isRed ? Colors.red : isGreen ? Colors.green : Colors.black,
                 ),
               ),
             ],
@@ -1997,7 +1886,8 @@ class Menu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff191919),
-        title: const Text('Menu'),
+        title: const Text('Menu' ,style: TextStyle( fontWeight: FontWeight.bold, // Add this line for bold font weight
+            fontFamily: 'serif'),),
       ),
       // body: const Center(
       //   child: Text('Menu'),
@@ -2061,6 +1951,8 @@ class Menu extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                            // Add this line for bold font weight
+                            fontFamily: 'serif',
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -2128,14 +2020,43 @@ class _DineInScreenState extends State<DineInScreen>
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff191919),
-           title:  Text("Dine IN"),
+           title:  Text(
+             'Dine IN',
+             style: TextStyle(
+               fontFamily: 'serif',
+             ),
+           ),
 
           bottom: TabBar(
             controller: _tabController,
             tabs: [
-              Tab(text: 'Indoor'),
-              Tab(text: 'Balcony'),
-              Tab(text: 'Garden'),
+              Tab(
+                child: Text(
+                  'Indoor',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                      fontFamily: 'serif'
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Balcony',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'serif'
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Garden',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'serif'
+                  ),
+                ),
+              ),
             ],
           ),
             actions: [
@@ -2182,10 +2103,6 @@ class _DineInScreenState extends State<DineInScreen>
 
         body: Container(
           color: Colors.white,
-
-
-
-
           child:TabBarView(
             controller: _tabController,
 
@@ -2198,123 +2115,229 @@ class _DineInScreenState extends State<DineInScreen>
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 16, left: 1, bottom: 30, right: 1),
-                    child: Text(
-                      'Table Reservation',
-                      style: TextStyle(fontSize: 25, color: Colors.black),
+
+                    padding: EdgeInsets.only(top: 16, left: 0, bottom: 0, right: 0),
+                    child:Row(
+                      children: [
+
+                        Container(
+                          margin: EdgeInsets.only(left: 10.0,right: 10.0),
+                          decoration: BoxDecoration(
+
+                            color: Color(0xffb3ff66), // Set the desired background color
+                            shape: BoxShape.circle, // Set the shape of the container (circle in this case)
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(5.0), // Optional padding for the icon
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+
+                        Text(
+                          'Table Reservation',
+                          style: TextStyle(fontSize: 20, color: Colors.black, // Add this line for italic font style
+                              fontWeight: FontWeight.bold, // Add this line for bold font weight
+                              fontFamily: 'serif'),
+                        ),
+
+              ]
                     ),
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
+                  Padding(
+
+                    padding: EdgeInsets.only(top: 10, left: 1, bottom: 10, right: 1),
+                    child:Row(
                         children: [
-                          TableCard(number: 'T1', index: 1, ammount: ""),
-                          TableCard(number: 'T2', index: 1, isRed: true, ammount: ""),
-                          TableCard(number: 'T3', index: 3, ammount: "", isResGreen: true),
-                        ],
-                      ),
+
+                          Container(
+                            margin: EdgeInsets.only(left: 15.0,right: 10.0),
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+
+                              color: Colors.white, // Set the desired background color
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.black, // Set the desired border color
+                                width: 2.0, // Set the desired border width
+                              ),
+
+                              // Set the shape of the container (circle in this case)
+                            ),
+
+                          ),
+
+                          Text(
+                            'Blank Table',
+                            style: TextStyle(fontSize: 12, color: Colors.black, // Add this line for italic font style
+                                fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                fontFamily: 'serif'),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(left: 11.0,right: 10.0),
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+
+                              color: Color(0xffb3ff66), // Set the desired background color
+                              shape: BoxShape.circle,
+                              // Set the shape of the container (circle in this case)
+                            ),
+
+                          ),
+
+                          Text(
+                            'Running Table',
+                            style: TextStyle(fontSize: 12, color: Colors.black, // Add this line for italic font style
+                                fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                fontFamily: 'serif'),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 11.0,right: 10.0),
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+
+                              color: Colors.red, // Set the desired background color
+                              shape: BoxShape.circle,
+                              // Set the shape of the container (circle in this case)
+                            ),
+
+                          ),
+
+                          Text(
+                            'Payment Pending',
+                            style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                fontFamily: 'serif'),
+                          ),
+                        ]
                     ),
+
+
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T4', index: 1, ammount: ""),
-                          TableCard(number: 'T5', index: 1, isRed: true, ammount: ""),
-                          TableCard(number: 'T6', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T7', index: 1, ammount: ""),
-                          TableCard(number: 'T8', index: 1, isRed: true, ammount: "",isResGreen: true),
-                          TableCard(number: 'T9', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T10', index: 1, ammount: "",isResGreen: true),
-                          TableCard(number: 'T11', index: 1, isRed: true, ammount: ""),
-                          TableCard(number: 'T12', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T13', index: 1, ammount: ""),
-                          TableCard(number: 'T14', index: 1, isRed: true, ammount: ""),
-                          TableCard(number: 'T15', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T16', index: 1, ammount: ""),
-                          TableCard(number: 'T17', index: 1, isRed: true, ammount: "",isResGreen: true),
-                          TableCard(number: 'T18', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T19', index: 1, ammount: "",isResGreen: true),
-                          TableCard(number: 'T20', index: 1, isRed: true, ammount: ""),
-                          TableCard(number: 'T21', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        children: [
-                          TableCard(number: 'T22', index: 1, ammount: ""),
-                          TableCard(number: 'T23', index: 1, isRed: true, ammount: "",isResGreen: true),
-                          TableCard(number: 'T24', index: 3, ammount: ""),
-                        ],
-                      ),
-                    ),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+                 child: GridView.count(
+                    shrinkWrap: true,
+                   physics: NeverScrollableScrollPhysics(),
+                    crossAxisCount: 4,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time: "", number: 'T1', index: 4, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"54 min",number: 'T2', index: 2, isGreen: true,ammount: '\Rs10.99'),),
+                      Container(
+                      margin: EdgeInsets.only(top: 25.0),
+                        child:TableCard(time:" ",number: 'T3', index: 3, ammount: "", isResGreen: true),),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T4', index: 4, ammount: ""),),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T5', index: 5, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T6', index: 6, isRed: true, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T7', index: 7, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T8', index: 8, isRed: true,ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                     child: TableCard(time:"",number: 'T9', index: 9, ammount: ""),),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T10', index: 10, isRed: false, ammount: "",isResGreen: true),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T11', index: 11, isRed: true, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"12 min",number: 'T12', index: 12, isGreen: true , ammount: '\Rs10.99'),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"77 min",number: 'T13', index: 13, isGreen: true,ammount: '\Rs10.99'),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T14', index: 14, isRed: true, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T15', index: 15, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T16', index: 16, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T17', index: 17, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T18', index: 18, isRed: false, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T19', index: 19, isRed: true,ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T20', index: 20, isRed: true,ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T21', index: 21, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"77 min",number: 'T22', index: 22, isGreen: true,ammount: '\Rs10.99'),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                     child: TableCard(time:"7 min",number: 'T23', index: 23, isGreen: true,ammount: '\Rs10.99'),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"7 min",number: 'T24', index: 24, isGreen: true,ammount: '\Rs10.99'),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T25', index: 25, ammount: "",isResGreen: true),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T26', index: 26, isRed: true, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T27', index: 27, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T28', index: 28, ammount: ""),),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T29', index: 29, ammount: ""),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T30', index: 30, isRed: true, ammount: "",isResGreen: true),),
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T31', index: 31, ammount: ""),),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 25.0),
+                      child:TableCard(time:"",number: 'T31', index: 32,isRed: true, ammount: ""),),
+
+                    ],
                   ),
 
-                  // Rest of the TableCard rows...
-                ],
+            ),
+          ],
               ),
             ),
           ),
-
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Padding(
@@ -2322,118 +2345,225 @@ class _DineInScreenState extends State<DineInScreen>
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 16, left: 1, bottom: 30, right: 1),
-                        child: Text(
-                          'Table Reservation',
-                          style: TextStyle(fontSize: 25, color: Colors.black),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T1', index: 1, ammount: ""),
-                              TableCard(number: 'T2', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T3', index: 3, ammount: "", isResGreen: true),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T4', index: 1, ammount: ""),
-                              TableCard(number: 'T5', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T6', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T7', index: 1, ammount: ""),
-                              TableCard(number: 'T8', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T9', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T10', index: 1, ammount: "",isResGreen: true),
-                              TableCard(number: 'T11', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T12', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T13', index: 1, ammount: ""),
-                              TableCard(number: 'T14', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T15', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T16', index: 1, ammount: ""),
-                              TableCard(number: 'T17', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T18', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T19', index: 1, ammount: "",isResGreen: true),
-                              TableCard(number: 'T20', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T21', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T22', index: 1, ammount: ""),
-                              TableCard(number: 'T23', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T24', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
 
-                      // Rest of the TableCard rows...
+                        padding: EdgeInsets.only(top: 16, left: 0, bottom: 0, right: 0),
+                        child:Row(
+                            children: [
+
+                              Container(
+                                margin: EdgeInsets.only(left: 10.0,right: 10.0),
+                                decoration: BoxDecoration(
+
+                                  color: Color(0xffb3ff66), // Set the desired background color
+                                  shape: BoxShape.circle, // Set the shape of the container (circle in this case)
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(5.0), // Optional padding for the icon
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+
+                              Text(
+                                'Table Reservation',
+                                style: TextStyle(fontSize: 20, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+
+                            ]
+                        ),
+                      ),
+                      Padding(
+
+                        padding: EdgeInsets.only(top: 10, left: 1, bottom: 10, right: 1),
+                        child:Row(
+                            children: [
+
+                              Container(
+                                margin: EdgeInsets.only(left: 15.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Colors.white, // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.black, // Set the desired border color
+                                    width: 2.0, // Set the desired border width
+                                  ),
+
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Blank Table',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(left: 12.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Color(0xffb3ff66), // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Running Table',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 12.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Colors.red, // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Payment Pending',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+                            ]
+                        ),
+
+
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time: "", number: 'T1', index: 4, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"54 min",number: 'T2', index: 2, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:" ",number: 'T3', index: 3, ammount: "", isResGreen: true),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T4', index: 4, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T5', index: 5, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T6', index: 6, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T7', index: 7, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T8', index: 8, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child: TableCard(time:"",number: 'T9', index: 9, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T10', index: 10, isRed: false, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T11', index: 11, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"12 min",number: 'T12', index: 12, isGreen: true , ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"77 min",number: 'T13', index: 13, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T14', index: 14, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T15', index: 15, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T16', index: 16, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T17', index: 17, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T18', index: 18, isRed: false, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T19', index: 19, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T20', index: 20, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T21', index: 21, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"77 min",number: 'T22', index: 22, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child: TableCard(time:"7 min",number: 'T23', index: 23, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"7 min",number: 'T24', index: 24, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T25', index: 25, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T26', index: 26, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T27', index: 27, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T28', index: 28, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T29', index: 29, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T30', index: 30, isRed: true, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T31', index: 31, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T31', index: 32,isRed: true, ammount: ""),),
+
+                          ],
+                        ),
+
+                      ),
                     ],
                   ),
                 ),
@@ -2445,123 +2575,229 @@ class _DineInScreenState extends State<DineInScreen>
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 16, left: 1, bottom: 30, right: 1),
-                        child: Text(
-                          'Table Reservation',
-                          style: TextStyle(fontSize: 25, color: Colors.black),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T1', index: 1, ammount: ""),
-                              TableCard(number: 'T2', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T3', index: 3, ammount: "", isResGreen: true),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T4', index: 1, ammount: ""),
-                              TableCard(number: 'T5', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T6', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T7', index: 1, ammount: ""),
-                              TableCard(number: 'T8', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T9', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T10', index: 1, ammount: "",isResGreen: true),
-                              TableCard(number: 'T11', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T12', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T13', index: 1, ammount: ""),
-                              TableCard(number: 'T14', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T15', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T16', index: 1, ammount: ""),
-                              TableCard(number: 'T17', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T18', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T19', index: 1, ammount: "",isResGreen: true),
-                              TableCard(number: 'T20', index: 1, isRed: true, ammount: ""),
-                              TableCard(number: 'T21', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              TableCard(number: 'T22', index: 1, ammount: ""),
-                              TableCard(number: 'T23', index: 1, isRed: true, ammount: "",isResGreen: true),
-                              TableCard(number: 'T24', index: 3, ammount: ""),
-                            ],
-                          ),
-                        ),
-                      ),
 
-                      // Rest of the TableCard rows...
+                        padding: EdgeInsets.only(top: 16, left: 0, bottom: 0, right: 0),
+                        child:Row(
+                            children: [
+
+                              Container(
+                                margin: EdgeInsets.only(left: 10.0,right: 10.0),
+                                decoration: BoxDecoration(
+
+                                  color: Color(0xffb3ff66), // Set the desired background color
+                                  shape: BoxShape.circle, // Set the shape of the container (circle in this case)
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(5.0), // Optional padding for the icon
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+
+                              Text(
+                                'Table Reservation',
+                                style: TextStyle(fontSize: 20, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+
+                            ]
+                        ),
+                      ),
+                      Padding(
+
+                        padding: EdgeInsets.only(top: 10, left: 1, bottom: 10, right: 1),
+                        child:Row(
+                            children: [
+
+                              Container(
+                                margin: EdgeInsets.only(left: 15.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Colors.white, // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.black, // Set the desired border color
+                                    width: 2.0, // Set the desired border width
+                                  ),
+
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Blank Table',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+
+                              Container(
+                                margin: EdgeInsets.only(left: 12.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Color(0xffb3ff66), // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Running Table',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 12.0,right: 10.0),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+
+                                  color: Colors.red, // Set the desired background color
+                                  shape: BoxShape.circle,
+                                  // Set the shape of the container (circle in this case)
+                                ),
+
+                              ),
+
+                              Text(
+                                'Payment Pending',
+                                style: TextStyle(fontSize: 11, color: Colors.black, // Add this line for italic font style
+                                    fontWeight: FontWeight.bold, // Add this line for bold font weight
+                                    fontFamily: 'serif'),
+                              ),
+                            ]
+                        ),
+
+
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time: "", number: 'T1', index: 4, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"54 min",number: 'T2', index: 2, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:" ",number: 'T3', index: 3, ammount: "", isResGreen: true),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T4', index: 4, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T5', index: 5, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T6', index: 6, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T7', index: 7, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T8', index: 8, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child: TableCard(time:"",number: 'T9', index: 9, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T10', index: 10, isRed: false, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T11', index: 11, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"12 min",number: 'T12', index: 12, isGreen: true , ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"77 min",number: 'T13', index: 13, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T14', index: 14, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T15', index: 15, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T16', index: 16, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T17', index: 17, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T18', index: 18, isRed: false, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T19', index: 19, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T20', index: 20, isRed: true,ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T21', index: 21, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"77 min",number: 'T22', index: 22, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child: TableCard(time:"7 min",number: 'T23', index: 23, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"7 min",number: 'T24', index: 24, isGreen: true,ammount: '\Rs10.99'),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T25', index: 25, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T26', index: 26, isRed: true, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T27', index: 27, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T28', index: 28, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T29', index: 29, ammount: ""),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T30', index: 30, isRed: true, ammount: "",isResGreen: true),),
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T31', index: 31, ammount: ""),),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 25.0),
+                              child:TableCard(time:"",number: 'T31', index: 32,isRed: true, ammount: ""),),
+
+                          ],
+                        ),
+
+                      ),
                     ],
                   ),
                 ),
               ),
-
             ],
           ),
 
@@ -2922,99 +3158,206 @@ class FinalitemListScreen extends StatelessWidget {
   }
 }
 //////////////////
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
 
+}
+
+
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-
-
   final TextEditingController phoneNumberController = TextEditingController();
-  Future<void> sendMessage(BuildContext context,String mobileNumber, String message) async {
+  void submit() async {
+
+    if (phoneNumberController.text == "") return;
+
+    var appSignatureID = await SmsAutoFill().getAppSignature;
+    Map sendOtpData = {
+      "mobile_number": phoneNumberController.text,
+      "app_signature_id": appSignatureID
+    };
+
+
+    print(sendOtpData);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  OTPScreen(phoneNumberController.text)),
+    );
+  }
+
+  Future<void> sendMessage(BuildContext context, String mobileNumber, String message) async {
     final apiKey = 'de6cba5a46a24e16ad25f58d557c86bd';
     final url = Uri.parse('http://msgclub.softhubinc.com/rest/otpservice/generate-otp?AUTH_KEY=$apiKey&mobileNumber=$mobileNumber&message=$message');
 
+
+
     try {
+      setState(() {
+        _isLoading = false; // Start showing the progress indicator
+      });
+
       final response = await http.get(url);
-      var ssss=response.statusCode;
+      var ssss = response.statusCode;
       print('printasaa :$ssss');
 
       if (response.statusCode == 200) {
         String phoneNumber = phoneNumberController.text;
+        String responseBody = response.body;
+        print("Hellooo: $responseBody");
         print("Hellooo: $phoneNumber");
-        // Message sent successfully
 
-        Navigator.push(context, MaterialPageRoute(builder:(context)=>OTPScreen(phoneNumber)),);
-       // phoneNumber=" ";
+        if (responseBody.contains("Mobile number is required")) {
+          Fluttertoast.showToast(
+            msg: 'Please Enter mobile number',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red[700],
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        } else if (phoneNumber.length < 10) {
+          Fluttertoast.showToast(
+            msg: 'Please enter 10 digit mobile number',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red[700],
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        } else {
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => OTPScreen(phoneNumber)),
+          // );
+          submit();
+        }
+
         print('Message sent!');
       } else {
-        // Message sending failed
         print('Failed to send the message');
       }
     } catch (e) {
-      // Error occurred while sending the message
       print('Error: $e');
+    } finally {
+      setState(() {
+        _isLoading = false; // Stop showing the progress indicator
+      });
     }
   }
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.black,
+      statusBarIconBrightness: Brightness.light,
+    ));
 
     return Scaffold(
-      resizeToAvoidBottomInset : false,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('Restaurant App'),
-      ),
+      resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.only(left:20.0,right:20.0,bottom: 200.0,top: 1.0),
+        padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 200.0, top: 80.0),
         margin: EdgeInsets.only(bottom: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 20.0), // Add margin here
-              child: Image.asset(
-                'assets/images/login.png',
-                height: 100,
+              padding: EdgeInsets.only(bottom: 20.0),
+
+              child: Container(
                 width: 100,
-              ),
-            ),
-          //  Image.asset('assets/images/login.png'),
-            TextField(
-              controller: phoneNumberController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: 'Enter your mobile number',
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Colors.black,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2,
+                  ),
                 ),
-                prefixStyle: TextStyle(
-                  color: Colors.black, // Set the color of the prefix label text
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10.0),
+                child: Center(
+                  child: Icon(
+                   Icons.restaurant,
+                    color: Colors.black,
+                    size: 40,
+                  ),
                 ),
               ),
-
             ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 40.0),
+              child: Text("Restromagic",
+                style:TextStyle(fontSize: 25,fontFamily: "serif",fontWeight: FontWeight.bold,color: Colors.black)
 
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 50.0),
+              child: Text("Login with your phone number",
+                  style:TextStyle(fontSize: 15,fontFamily: "serif",color: Colors.black, fontStyle: FontStyle.italic,)
+
+              ),
+            ),
+            // TextField(
+            //   controller: phoneNumberController,
+            //   keyboardType: TextInputType.phone,
+            //   decoration: InputDecoration(
+            //     labelText: 'Enter your mobile number',
+            //     prefixIcon: Icon(
+            //       Icons.phone,
+            //       color: Colors.black,
+            //     ),
+            //     prefixStyle: TextStyle(
+            //       color: Colors.black,
+            //     ),
+            //     enabledBorder: OutlineInputBorder(
+            //       borderSide: BorderSide(color: Colors.grey),
+            //       borderRadius: BorderRadius.circular(10.0),
+            //     ),
+            //     focusedBorder: OutlineInputBorder(
+            //       borderSide: BorderSide(color: Colors.black),
+            //       borderRadius: BorderRadius.circular(10.0),
+            //     ),
+            //   ),
+            // ),
+            ListTile(
+              title: TextFormField(
+                controller: phoneNumberController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your number',
+                  hintStyle: TextStyle(
+                    fontStyle: FontStyle.italic,
+                      fontFamily: "serif",
+                      fontSize: 15,
+                   // Replace with your desired font size
+                  ),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.red,
+
+                      // Replace with your desired line color
+                    ),
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 30.0),
-
             ElevatedButton(
-              onPressed: () {
+              onPressed: _isLoading
+                  ? null
+                  : () {
                 String phoneNumber = phoneNumberController.text;
                 print("hettggg:$phoneNumber");
-                sendMessage(context,phoneNumber,'hello');
-               // Navigator.push(context, MaterialPageRoute(builder:(context)=>OTPScreen()),);
-
-
-                // Add your logic for handling the login button press here
+                sendMessage(context, phoneNumber, 'hello');
               },
-              child: Text('Send OTP'),
+              child: _isLoading
+                  ? CircularProgressIndicator()
+                  : Text('Send OTP'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.black,
                 shape: RoundedRectangleBorder(
@@ -3031,13 +3374,75 @@ class LoginPage extends StatelessWidget {
 }
 
 ///
-///
-class OTPScreen extends StatelessWidget {
-  late var otpstring=" ";
+class OTPScreen extends StatefulWidget {
   final String phoneNumber;
-  final TextEditingController otpController = TextEditingController();
+
+
+  //late var otpstring = " ";
+  //final TextEditingController otpController = TextEditingController();
 
   OTPScreen(this.phoneNumber);
+
+  @override
+  _OTPScreenState createState() => _OTPScreenState();
+}
+
+class _OTPScreenState extends State<OTPScreen>  {
+  late var otpstring = " ";
+  final TextEditingController otpController = TextEditingController();
+  String otpCode = "";
+  String otp = "";
+
+
+  @override
+  void codeUpdated() {
+
+    setState(() {
+      print("codeUpdated");
+    });
+  }
+  @override
+  void initState() {
+  //  _listenOtp();
+
+    super.initState();
+
+    // // Simulate OTP auto-fill after a delay of 2 seconds
+    // Future.delayed(Duration(seconds: 2), () {
+    //   setState(() {
+    //     _listenOtp();
+    //     otpCode = "123456"; // Replace with the actual OTP you want to auto-fill
+    //   });
+    // });
+    _listenOtp();
+  }
+
+
+
+  void _listenOtp() async {
+   //  await SmsAutoFill().unregisterListener();
+   // listenForCode();
+    await SmsAutoFill().listenForCode;
+
+    print("OTP listen Called");
+
+
+
+  }
+
+  validateOtp(String otp) {
+    print('Code received $otp');
+  }
+
+
+
+  @override
+  void dispose() {
+    SmsAutoFill().unregisterListener();
+    print("Unregistered Listener");
+    super.dispose();
+  }
+
 
 
   Future<bool> verifyOTP(BuildContext context,String mobileNumber, String otp) async {
@@ -3076,74 +3481,129 @@ class OTPScreen extends StatelessWidget {
     // OTP verification failed (handle other status codes or errors)
     return false;
   }
-  
+
+
+
   @override
   Widget build(BuildContext context) {
     otpstring=" ";
-    print("numberinggg:$phoneNumber");
-    return Scaffold(
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+
+    return WillPopScope(
+        onWillPop: () async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+      print("yellooee");
+
+
+      return true;
+        },
+    child: Scaffold(
       resizeToAvoidBottomInset : false,
 
       appBar: AppBar(
         backgroundColor: const Color(0xff191919),
-        title: Text('OTP Verification'),
+        title: Text('OTP Verification',style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'serif'
+        ),),
+
       ),
       body: Container(
-        padding: EdgeInsets.only(left:20.0,right:20.0,bottom: 200.0,top: 1.0),
+        padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 200.0, top: 80.0),
         margin: EdgeInsets.only(bottom: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 15.0), // Add margin here
-              child: Image.asset(
-                'assets/images/otp.png',
-                height: 100,
+              padding: EdgeInsets.only(bottom: 20.0),
+
+              child: Container(
                 width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                 // color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(100),
+                  // border: Border.all(
+                  //   color: Colors.black,
+                  //   width: 2,
+                  // ),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                    size: 70,
+                  ),
+                ),
               ),
-
-            ),
-            //Text("Phone Number Verification"),
-            Padding(
-              padding: EdgeInsets.only(bottom: 15,left: 15,right: 15), //apply padding to all four sides
-              child: Text("Phone Number Verification",style:TextStyle(fontSize: 25,color: Colors.black), ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 15,left: 15,right: 15), //apply padding to all four sides
-              child: Text("Enter the code sent to 8800936987",style:TextStyle(fontSize: 15,color: Colors.grey), ),
-            )
+              padding: EdgeInsets.only(bottom: 40.0),
+              child: Text("Restromagic",
+                  style:TextStyle(fontSize: 25,fontFamily: "serif",fontWeight: FontWeight.bold,color: Colors.black)
 
-            ,
-            OtpTextField(
-              numberOfFields: 6,
-              borderColor:  Color(0xFF6A53A1),
-                enabledBorderColor:	Colors.indigoAccent,
-                disabledBorderColor: Colors.indigoAccent,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 50.0),
+              child: Text("Please enter the verification code",
+                  style:TextStyle(fontSize: 15,fontFamily: "serif",color: Colors.black, fontStyle: FontStyle.italic,)
 
-              //set to true to show as box or false to show as dash
-              showFieldAsBox: true,
-              //runs when a code is typed in
-              onCodeChanged: (String code) {
-                print('sshgdhsgdhgs: $code');
-                //handle validation or checks here
+              ),
+            ),
+            // OtpTextField(
+            //   numberOfFields: 6,
+            //   borderColor:  Colors.black,
+            //   enabledBorderColor:	Colors.black,
+            //   disabledBorderColor: Colors.black,
+            //
+            //   //set to true to show as box or false to show as dash
+            //   showFieldAsBox: false,
+            //   //runs when a code is typed in
+            //   onCodeChanged: (String code) {
+            //     print('sshgdhsgdhgs: $code');
+            //     otpCode = code.toString();
+            //     //handle validation or checks here
+            //   },
+            //   onSubmit: (String verificationCode){
+            //     otpstring=verificationCode;
+            //
+            //     print('verificationn: $verificationCode');
+            //
+            //   }, // end onSubmit
+            // ),
+
+            PinFieldAutoFill(
+              currentCode: otpstring,
+              // decoration:  BoxLooseDecoration(
+              //     radius: Radius.circular(12),
+              //     strokeColorBuilder: FixedColorBuilder(
+              //         Color(0xFF8C4A52))),
+              codeLength: 6,
+              onCodeChanged: (code) {
+                print("OnCodeChanged : $code");
+                // otpCode = code.toString();
+                otpstring = code.toString();
+                print("OnCodeChanged : $code");
               },
-              onSubmit: (String verificationCode){
-                otpstring=verificationCode;
-                print('verificationn: $verificationCode');
-                // showDialog(
-                //     context: context,
-                //     builder: (context){
-                //       return AlertDialog(
-                //         title: Text("Verification Code"),
-                //         content: Text('Code entered is $verificationCode'),
-                //       );
-                //     }
-                // );
-              }, // end onSubmit
+              onCodeSubmitted: (val) {
+                print("OnCodeSubmitted : $val");
+              },
             ),
+
+
             Padding(
-              padding: EdgeInsets.only(top:20,left: 15,right: 15), //apply padding to all four sides
-              child: Text("Don't receive The code ?RESEND",style:TextStyle(fontSize: 15,color:Colors.green), ),
+              padding: EdgeInsets.only(top:20,left: 200,right: 15), //apply padding to all four sides
+              child: Text("Resend Code",style:TextStyle(fontSize: 15,color:Colors.black,fontWeight: FontWeight.bold,
+                  fontFamily: 'serif'), ),
             ),
 
             SizedBox(height: 30.0),
@@ -3154,27 +3614,29 @@ class OTPScreen extends StatelessWidget {
                 print('optstringgg2');
 
                 if(otpstring==" ")
-                  {
-                    Fluttertoast.showToast(
-                      msg: 'Please enter the OTP',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red[700],
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
-                  }
+                {
+                  Fluttertoast.showToast(
+                    msg: 'Please enter the OTP',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red[700],
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                }
                 else {
-                  print('number:$phoneNumber');
-                  verifyOTP(context, phoneNumber, otpstring);
+                  print('ppppp3: $widget.phoneNumber');
+                  verifyOTP(context, widget.phoneNumber, otpstring);
 
                 }
 
               },
-              child: Text('OTP Verification'),
+              child: Text('Submit',style: TextStyle( fontWeight: FontWeight.bold,
+                  fontFamily: 'serif'),),
               style: ElevatedButton.styleFrom(
                 primary: Colors.black,
+
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -3185,10 +3647,13 @@ class OTPScreen extends StatelessWidget {
         ),
       ),
 
-
+    ),
     );
+
   }
 }
+
+
 
 // void main() {
 //   runApp(MaterialApp(
@@ -3196,10 +3661,17 @@ class OTPScreen extends StatelessWidget {
 //   ));
 // }
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+    statusBarColor: Colors.black,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
   runApp(MaterialApp(
     home: LoginPage(),
 
+
   ));
+
 }
 
 class FoodItem {
@@ -3223,3 +3695,6 @@ class Addinal {
 
   Addinal({required this.id,required this.name, required this.price, required this.imagePath});
 }
+
+////////////
+

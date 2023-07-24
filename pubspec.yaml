@@ -35,6 +35,13 @@ dependencies:
   http: ^0.13.0
   flutter_rating_bar: ^4.0.0
   carousel_slider: ^4.0.0
+  cached_network_image: ^3.0.0
+  sms_autofill: ^2.3.0
+
+
+
+
+
 
 
 
